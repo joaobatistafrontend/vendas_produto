@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Vendas {{total}}</h1>
+    <h2>Mais vendido {{mais_vendido.produto.nome_produto}}</h2>
+    
+    <ul>
+        {% for ven in vendas%}
+            <li>{{ ven.produto.nome_produto }}</li>
+            <li>{{ ven.data_venda}}</li>
+            <li>{{ ven.qtd}}</li>
+            <li>{{ ven.total}}</li>
+            <br>
+        {% endfor %}
+    </ul>
+</body>
+</html>

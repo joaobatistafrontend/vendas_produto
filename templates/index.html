@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Relatório de Vendas</h1>
+    <p>Total de todas as vendas: R${{ total }}</p>
+    
+    {% if mais_vendido %}
+        <h2>Produto Mais Vendido</h2>
+        <p>Produto: {{ mais_vendido.produto__nome_produto }}</p>
+        <p>Quantidade Vendida: {{ mais_vendido.total_vendido }}</p>
+        <p>Total Arrecadado: R${{ mais_vendido.total_revenue }}</p>
+    {% else %}
+        <p>Nenhuma venda registrada.</p>
+    {% endif %}
+    
+    <h2>Detalhes das Vendas</h2>
+    <ul>
+        {% for venda in vendas %}
+            <li>{{ venda }}</li>
+        {% endfor %}
+    </ul>
+    <ul>
+        {% for ven in vendas%}
+            <li>{{ ven.produto.nome_produto }}</li>
+            <li>{{ ven.data_venda}}</li>
+            <li>{{ ven.qtd}}</li>
+            <li>{{ ven.total}}</li>
+            <br>
+        {% endfor %}
+    </ul>
+</body>
+</html>
