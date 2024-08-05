@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendas diaria</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="mb-4">Dashboard de Vendas </h1>
+
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="card text-white bg-primary">
+                <div class="card-header">Total de Vendas</div>
+                <div class="card-body">
+                    <h5 class="card-title">R${{ totalVendas }}</h5>
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card text-white bg-info">
+                <div class="card-header">Total de Vendas do Dia</div>
+                <div class="card-body">
+                    <h5 class="card-title">R${{ total_dia }}</h5>
+                    <button class="btn btn-primary" onclick="window.location.href = '{% url 'detalhesDias' %}'">visualizar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card text-white bg-warning">
+                <div class="card-header">Total de Vendas da Semana</div>
+                <div class="card-body">
+                    <h5 class="card-title">R${{ total_semana }}</h5>
+                    <button class="btn btn-primary" onclick="window.location.href = '{% url 'detalhesMes' %}'">visualizar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card text-white bg-danger">
+                <div class="card-header">Total de Vendas do Mês</div>
+                <div class="card-body">
+                    <h5 class="card-title">R${{ total_mes }}</h5>
+                </div>
+            </div>
+        </div>
+
+        {% if mais_vendido %}
+        <div class="col-md-10">
+            <div class="card text-white bg-success">
+                <div class="card-header">Produto Mais Vendido</div>
+                <div class="card-body">
+                    <h5 class="card-title">Produto: {{ mais_vendido.produto__nome_produto }}</h5>
+                    <p class="card-text">Quantidade Vendida: {{ mais_vendido.total_vendido }}</p>
+                    <p class="card-text">Total Arrecadado: R${{ mais_vendido.total_revenue }}</p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <section>        
+        <div class="container">
+            <table class="table table-primary">
+                <thead class="table-danger">
+                    <tr class="table-danger">
+                        <th>Categoria</th>
+                        <th>Produto</th>
+                        <th>Quantidade</th>
+                        <th>data</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for venda in vendas_mes %}
+                        <tr>
+                            <th>{{venda.produto.tipo_categoria}}</th>
+                            <th>{{venda.produto.nome_produto}}</th>
+                            <th>{{venda.qtd}}</th>
+                            <th>{{venda.total}}</th>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+    
+            <!-- <div class="row">
+    
+                <div class="card mt-4">
+                    <div class="card-header">Vendas do Dia {{ total_dia }}</div>
+                    <div class="card-body">
+                        <ul class="list-group">
+        
+                            {% for venda in vendas_dia %}
+                                <li class="list-group-item list-group-item-secondary">{{venda.produto.tipo_categoria}}- {{venda.produto.nome_produto}} - {{venda.qtd}} - {{venda.total}}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+    
+    
+        
+            </div> -->
+        </div>
+    </section>
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
